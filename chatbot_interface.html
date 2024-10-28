@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Chatbot Reglamento Eléctrico</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 400px;
+            height: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .chat-window {
+            flex: 1;
+            padding: 15px;
+            background-color: #ffffff;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 10px;
+            display: flex;
+        }
+        .user-message {
+            justify-content: flex-end;
+        }
+        .bot-message {
+            justify-content: flex-start;
+        }
+        .message p {
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .user-message p {
+            background-color: #cce5ff;
+            color: #003366;
+        }
+        .bot-message p {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input textarea {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            resize: none;
+        }
+        .chat-input button {
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Asistente de Reglamento de Baja Tensión</div>
+        <div class="chat-window" id="chat-window">
+            <!-- Mensajes del chat -->
+        </div>
+        <div class="chat-input">
+            <textarea id="user-input" rows="1" placeholder="Escribe tu pregunta..."></textarea>
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatWindow = document.getElementById('chat-window');
+
+            if (userInput.value.trim() === '') return;
+
+            // Añadir mensaje del usuario
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.innerHTML = `<p>${userInput.value}</p>`;
+            chatWindow.appendChild(userMessage);
+
+            // Limpiar entrada de texto
+            const userText = userInput.value;
+            userInput.value = '';
+
+            // Scroll hacia abajo
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            // Simular respuesta del bot (esto se reemplazaría con la API real)
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.innerHTML = `<p>Estoy procesando tu consulta sobre: "${userText}"...</p>`;
+                chatWindow.appendChild(botMessage);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
